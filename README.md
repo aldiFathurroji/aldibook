@@ -1,70 +1,244 @@
-# Getting Started with Create React App
+# Tekweb Aldi API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This API allows you to perform CRUD operations on two categories of books: normal books and best seller books. The API is built using Express.js and Firebase Firestore.
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+1. Clone the repository.
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
+3. Add your Firebase service account key JSON file to the `path to serviceAccountKey.json`.
+4. Start the server:
+    ```bash
+    npm start
+    ```
 
-### `npm start`
+## Endpoints
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Normal Books
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Create a new normal book
+- **URL:** `/normalBooks`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+      "title": "string",
+      "author": "string",
+      "category": "string",
+      "rating": number,
+      "price": number,
+      "description": "string",
+      "image": "string"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+      "message": "Created a new normal book: {id}"
+    }
+    ```
 
-### `npm test`
+#### Read all normal books
+- **URL:** `/normalBooks`
+- **Method:** `GET`
+- **Response:**
+    ```json
+    [
+      {
+        "id": "string",
+        "title": "string",
+        "author": "string",
+        "category": "string",
+        "rating": number,
+        "price": number,
+        "description": "string",
+        "image": "string"
+      },
+      // ...more books
+    ]
+    ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Read a single normal book by ID
+- **URL:** `/normalBooks/:id`
+- **Method:** `GET`
+- **Response:**
+    ```json
+    {
+      "id": "string",
+      "title": "string",
+      "author": "string",
+      "category": "string",
+      "rating": number,
+      "price": number,
+      "description": "string",
+      "image": "string"
+    }
+    ```
 
-### `npm run build`
+#### Update a normal book by ID
+- **URL:** `/normalBooks/:id`
+- **Method:** `PUT`
+- **Body:**
+    ```json
+    {
+      "title": "string",
+      "author": "string",
+      "category": "string",
+      "rating": number,
+      "price": number,
+      "description": "string",
+      "image": "string"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+      "message": "Normal book updated"
+    }
+    ```
+- **Note:** At least one field must be provided in the body to update the book.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Delete a normal book by ID
+- **URL:** `/normalBooks/:id`
+- **Method:** `DELETE`
+- **Response:**
+    ```json
+    {
+      "message": "Normal book deleted"
+    }
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Best Seller Books
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Create a new best seller book
+- **URL:** `/bestSellerBooks`
+- **Method:** `POST`
+- **Body:**
+    ```json
+    {
+      "title": "string",
+      "author": "string",
+      "category": "string",
+      "rating": number,
+      "price": number,
+      "description": "string",
+      "image": "string"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+      "message": "Created a new best seller book: {id}"
+    }
+    ```
 
-### `npm run eject`
+#### Read all best seller books
+- **URL:** `/bestSellerBooks`
+- **Method:** `GET`
+- **Response:**
+    ```json
+    [
+      {
+        "id": "string",
+        "title": "string",
+        "author": "string",
+        "category": "string",
+        "rating": number,
+        "price": number,
+        "description": "string",
+        "image": "string"
+      },
+      // ...more books
+    ]
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Read a single best seller book by ID
+- **URL:** `/bestSellerBooks/:id`
+- **Method:** `GET`
+- **Response:**
+    ```json
+    {
+      "id": "string",
+      "title": "string",
+      "author": "string",
+      "category": "string",
+      "rating": number,
+      "price": number,
+      "description": "string",
+      "image": "string"
+    }
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Update a best seller book by ID
+- **URL:** `/bestSellerBooks/:id`
+- **Method:** `PUT`
+- **Body:**
+    ```json
+    {
+      "title": "string",
+      "author": "string",
+      "category": "string",
+      "rating": number,
+      "price": number,
+      "description": "string",
+      "image": "string"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+      "message": "Best seller book updated"
+    }
+    ```
+- **Note:** At least one field must be provided in the body to update the book.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Delete a best seller book by ID
+- **URL:** `/bestSellerBooks/:id`
+- **Method:** `DELETE`
+- **Response:**
+    ```json
+    {
+      "message": "Best seller book deleted"
+    }
+    ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Example Requests
 
-## Learn More
+### Create a new normal book
+```bash
+curl -X POST http://localhost:3000/normalBooks -H "Content-Type: application/json" -d '{
+  "title": "The Problem with Forever",
+  "author": "Jennifer L. Armentrout",
+  "category": "Romance",
+  "rating": 4.8,
+  "price": 75000,
+  "description": "A moving story about friendship, survival, and finding your voice.",
+  "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg"
+}'
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Read all best seller books
+```bash
+curl -X GET http://localhost:3000/bestSellerBooks
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Update a normal book by ID
+```bash
+curl -X PUT http://localhost:3000/normalBooks/1 -H "Content-Type: application/json" -d '{
+  "title": "The Problem with Forever",
+  "author": "Jennifer L. Armentrout",
+  "category": "Romance",
+  "rating": 4.8,
+  "price": 75000,
+  "description": "A moving story about friendship, survival, and finding your voice.",
+  "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg"
+}'
+```
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Delete a best seller book by ID
+```bash
+curl -X DELETE http://localhost:3000/bestSellerBooks/1
+```
