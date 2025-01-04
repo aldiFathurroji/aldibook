@@ -19,10 +19,13 @@ export default function BookManager() {
         description: '',
         image: ''
     });
+    const [activeTab, setActiveTab] = useState('books');
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         if (isAuthenticated) {
             fetchBooks();
+            fetchCartItems();
         }
     }, [isAuthenticated]);
 
@@ -33,6 +36,16 @@ export default function BookManager() {
             setBooks(data);
         } catch (error) {
             console.error('Error fetching books:', error);
+        }
+    };
+
+    const fetchCartItems = async () => {
+        try {
+            const response = await fetch(`${API_URL}/cart`);
+            const data = await response.json();
+            setCartItems(data);
+        } catch (error) {
+            console.error('Error fetching cart:', error);
         }
     };
 
@@ -105,25 +118,38 @@ export default function BookManager() {
         }
     };
 
+    const handleDeleteCartItem = async (id) => {
+        if (window.confirm('Are you sure you want to delete this cart item?')) {
+            try {
+                await fetch(`${API_URL}/cart/${id}`, {
+                    method: 'DELETE'
+                });
+                await fetchCartItems();
+            } catch (error) {
+                console.error('Error deleting cart item:', error);
+            }
+        }
+    };
+
     if (!isAuthenticated) {
         return (
             <MainLayout>
                 <Navbar />
-                <div className="max-w-md mx-auto mt-20 p-6 bg-white rounded-lg shadow-lg">
-                    <h2 className="text-2xl font-bold mb-6">Enter Admin PIN</h2>
+                <div className="max-w-md mx-auto mt-20 p-6 bg-slate-700 rounded-lg shadow-lg">
+                    <h2 className="text-2xl font-bold mb-6 ">Masukan Admin PIN</h2>
                     <form onSubmit={handlePinSubmit}>
                         <input
                             type="password"
                             value={pin}
                             onChange={(e) => setPin(e.target.value)}
                             className="w-full p-2 border rounded mb-4"
-                            placeholder="Enter PIN"
+                            placeholder="Masukan PIN"
                         />
                         <button
-                            type="submit"
+                            type="masuk"
                             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
                         >
-                            Submit
+                            masuk
                         </button>
                     </form>
                 </div>
@@ -136,51 +162,147 @@ export default function BookManager() {
             <Navbar />
             <div className="max-w-7xl mx-auto px-4 py-8">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold">Book Manager</h1>
-                    <button
-                        onClick={() => setShowAddForm(true)}
-                        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-                    >
-                        Add New Book
-                    </button>
+                    <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+                    <div className="flex gap-4">
+                        <button
+                            onClick={() => setActiveTab('books')}
+                            className={`px-4 py-2 rounded ${
+                                activeTab === 'books' 
+                                    ? 'bg-blue-600 text-white' 
+                                    : 'bg-gray-200 hover:bg-gray-300'
+                            }`}
+                        >
+                            Manage Books
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('cart')}
+                            className={`px-4 py-2 rounded ${
+                                activeTab === 'cart' 
+                                    ? 'bg-blue-600 text-white' 
+                                    : 'bg-gray-200 hover:bg-gray-300'
+                            }`}
+                        >
+                            Manage Cart
+                        </button>
+                        {activeTab === 'books' && (
+                            <button
+                                onClick={() => setShowAddForm(true)}
+                                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                            >
+                                Add New Book
+                            </button>
+                        )}
+                    </div>
                 </div>
 
-                <div className="grid gap-6">
-                    {books.map(book => (
-                        <div key={book.id} className="bg-white p-6 rounded-lg shadow-lg">
-                            <div className="flex justify-between items-start">
-                                <div className="flex gap-4">
-                                    <img
-                                        src={book.image}
-                                        alt={book.title}
-                                        className="w-24 h-32 object-cover rounded"
-                                    />
-                                    <div>
-                                        <h3 className="text-xl font-bold">{book.title}</h3>
-                                        <p className="text-gray-600">{book.author}</p>
-                                        <p className="text-gray-600">Category: {book.category}</p>
-                                        <p className="text-green-600">Price: Rp {book.price.toLocaleString()}</p>
-                                        <p className="text-gray-600">Rating: {book.rating}</p>
+                {activeTab === 'books' ? (
+                    <div className="grid gap-6">
+                        {books.map(book => (
+                            <div key={book.id} className="bg-white p-6 rounded-lg shadow-lg">
+                                <div className="flex justify-between items-start">
+                                    <div className="flex gap-4">
+                                        <img
+                                            src={book.image}
+                                            alt={book.title}
+                                            className="w-24 h-32 object-cover rounded"
+                                        />
+                                        <div>
+                                            <h3 className="text-xl font-bold">{book.title}</h3>
+                                            <p className="text-gray-600">{book.author}</p>
+                                            <p className="text-gray-600">Category: {book.category}</p>
+                                            <p className="text-green-600">Price: Rp {book.price.toLocaleString()}</p>
+                                            <p className="text-gray-600">Rating: {book.rating}</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={() => handleEdit(book)}
+                                            className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            onClick={() => handleDelete(book.id)}
+                                            className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                                        >
+                                            Delete
+                                        </button>
                                     </div>
                                 </div>
-                                <div className="flex gap-2">
-                                    <button
-                                        onClick={() => handleEdit(book)}
-                                        className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        onClick={() => handleDelete(book.id)}
-                                        className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
                             </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="bg-white rounded-lg shadow-lg p-6">
+                        <h2 className="text-xl font-semibold mb-4">Cart Items</h2>
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full">
+                                <thead>
+                                    <tr className="bg-gray-100">
+                                        <th className="px-4 py-2 text-left">Order ID</th>
+                                        <th className="px-4 py-2 text-left">Book</th>
+                                        <th className="px-4 py-2 text-left">User ID</th>
+                                        <th className="px-4 py-2 text-right">Quantity</th>
+                                        <th className="px-4 py-2 text-right">Price</th>
+                                        <th className="px-4 py-2 text-right">Total</th>
+                                        <th className="px-4 py-2 text-center">Added At</th>
+                                        <th className="px-4 py-2 text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {cartItems.map(item => (
+                                        <tr key={item.id} className="border-b">
+                                            <td className="px-4 py-2">{item.id}</td>
+                                            <td className="px-4 py-2">
+                                                <div className="flex items-center gap-2">
+                                                    <img 
+                                                        src={item.image} 
+                                                        alt={item.title}
+                                                        className="w-12 h-12 object-cover rounded"
+                                                    />
+                                                    <div>
+                                                        <p className="font-medium">{item.title}</p>
+                                                        <p className="text-sm text-gray-500">Book ID: {item.bookId}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-2">{item.userId}</td>
+                                            <td className="px-4 py-2 text-right">{item.quantity}</td>
+                                            <td className="px-4 py-2 text-right">
+                                                Rp {item.price.toLocaleString()}
+                                            </td>
+                                            <td className="px-4 py-2 text-right">
+                                                Rp {(item.price * item.quantity).toLocaleString()}
+                                            </td>
+                                            <td className="px-4 py-2 text-center">
+                                                {new Date(item.addedAt).toLocaleDateString()}
+                                            </td>
+                                            <td className="px-4 py-2 text-center">
+                                                <button
+                                                    onClick={() => handleDeleteCartItem(item.id)}
+                                                    className="text-red-600 hover:text-red-800"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <tfoot>
+                                    <tr className="bg-gray-50">
+                                        <td colSpan="5" className="px-4 py-2 text-right font-semibold">
+                                            Total Cart Value:
+                                        </td>
+                                        <td className="px-4 py-2 text-right font-semibold">
+                                            Rp {cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()}
+                                        </td>
+                                        <td colSpan="2"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                )}
 
                 {/* Edit Modal */}
                 {editingBook && (

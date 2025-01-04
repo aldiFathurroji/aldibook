@@ -35,7 +35,7 @@ export default function Search() {
                         <p>Try searching with different keywords</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ">
                         {searchResults.map((book) => (
                             <div
                                 key={book.id}

@@ -7,7 +7,7 @@
     "rating": 4.7,
     "price": 80000,
     "description": "A deeply emotional and thought-provoking romance novel.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://gpu.id/data-gpu/images/img-book/94378/Fiksi_-_It_Ends_With_Us.jpg",
     "pages": 384,
     "language": "English",
     "publisher": "Atria Books",
@@ -22,27 +22,12 @@
     "rating": 4.6,
     "price": 90000,
     "description": "A chilling psychological thriller with twists and turns.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCpOjo-eu6SQhqsEzE25ocSrsFigXPUCjROw&s",
     "pages": 336,
     "language": "English",
     "publisher": "Grand Central Publishing",
     "isbn": "978-1538724736",
     "slug": "verity"
-  },
-  {
-    "id": 1,
-    "title": "The Problem with Forever",
-    "author": "Jennifer L. Armentrout",
-    "category": "Romance",
-    "rating": 4.8,
-    "price": 75000,
-    "description": "A moving story about friendship, survival, and finding your voice.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
-    "pages": 480,
-    "language": "English",
-    "publisher": "Harlequin Teen",
-    "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
   },
   {
     "id": 4,
@@ -52,12 +37,12 @@
     "rating": 4.5,
     "price": 85000,
     "description": "A mesmerizing blend of fantasy, romance, and action.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://m.media-amazon.com/images/I/81RrEEMiOCL.jpg",
     "pages": 480,
     "language": "English",
     "publisher": "Harlequin Teen",
     "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
+    "slug": "a-court-of-thorns-and-roses"
   },
   {
     "id": 5,
@@ -67,12 +52,12 @@
     "rating": 4.3,
     "price": 78000,
     "description": "An enchanting tale of a magical circus and love.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://m.media-amazon.com/images/I/71+whvJjE3L.jpg",
     "pages": 480,
     "language": "English",
     "publisher": "Harlequin Teen",
     "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
+    "slug": "the-night-circus"
   },
   {
     "id": 6,
@@ -82,12 +67,12 @@
     "rating": 4.8,
     "price": 95000,
     "description": "A beautifully written retelling of the Iliad and a powerful love story.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://cdn.gramedia.com/uploads/items/The_Song_of_Achilles_cov.jpg",
     "pages": 480,
     "language": "English",
     "publisher": "Harlequin Teen",
     "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
+    "slug": "the-song-of-achilles"
   },
   {
     "id": 7,
@@ -97,12 +82,12 @@
     "rating": 4.6,
     "price": 78000,
     "description": "A touching story of survival and mystery set in the marshlands.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://upload.wikimedia.org/wikipedia/en/2/23/Where_the_Crawdads_Sing_%28film%29.jpg",
     "pages": 480,
     "language": "English",
     "publisher": "Harlequin Teen",
     "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
+    "slug": "where-the-crawdads-sing"
   },
   {
     "id": 8,
@@ -112,12 +97,12 @@
     "rating": 4.7,
     "price": 85000,
     "description": "A glamorous yet poignant tale of fame, love, and sacrifice.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://images-cdn.ubuy.co.id/65bb8587ec205b7de70422da-the-seven-husbands-of-evelyn-hugo-a.jpg",
     "pages": 480,
     "language": "English",
     "publisher": "Harlequin Teen",
     "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
+    "slug": "the-seven-husbands-of-evelyn-hugo"
   },
   {
     "id": 9,
@@ -127,12 +112,12 @@
     "rating": 4.5,
     "price": 72000,
     "description": "A fun and heartwarming romantic comedy perfect for summer.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://m.media-amazon.com/images/I/71kdiN5Y1YL.jpg",
     "pages": 480,
     "language": "English",
     "publisher": "Harlequin Teen",
     "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
+    "slug": "beach-read"
   },
   {
     "id": 10,
@@ -142,26 +127,13 @@
     "rating": 4.6,
     "price": 94000,
     "description": "A stunning reimagining of the life of the enchantress Circe.",
-    "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
+    "image": "https://cdn.gramedia.com/uploads/items/img956_6rMkgvn.jpg",
     "pages": 480,
     "language": "English",
     "publisher": "Harlequin Teen",
     "isbn": "978-0373212057",
-    "slug": "the-problem-with-forever"
-  },
-  {
-    "title": "bumi",
-    "author": "tereliye",
-    "category": "Fantasy",
-    "price": 100000,
-    "rating": 4.8,
-    "description": "aku manusia",
-    "image": "https://cdn.gramedia.com/uploads/items/9786020332956_Bumi-New-Cover.jpg",
-    "id": 34,
-    "pages": 450,
-    "language": "indosesia",
-    "publisher": "lupa",
-    "isbn": " 9786020332956",
-    "slug": "bumi"
+    "slug": "circe"
   }
+  
+
 ]

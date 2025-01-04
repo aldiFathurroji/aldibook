@@ -12,6 +12,8 @@ export default function BukuDetail() {
     const [pin, setPin] = useState("");
     const [showPinModal, setShowPinModal] = useState(false);
     const [editedBook, setEditedBook] = useState(null);
+    const [addingToCart, setAddingToCart] = useState(false);
+    const [quantity, setQuantity] = useState(1);
 
     const book = normalBook.find(b => b.id === parseInt(id)) ||
         books.find(b => b.id === parseInt(id));
@@ -64,6 +66,38 @@ export default function BukuDetail() {
         }
     };
 
+    const handleAddToCart = async () => {
+        try {
+            setAddingToCart(true);
+            const cartItem = {
+                bookId: book.id,
+                quantity: quantity,
+                price: book.price,
+                title: book.title,
+                image: book.image
+            };
+
+            const response = await fetch('http://localhost:5000/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cartItem)
+            });
+
+            if (response.ok) {
+                alert('Book added to cart successfully!');
+            } else {
+                throw new Error('Failed to add to cart');
+            }
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert('Failed to add to cart');
+        } finally {
+            setAddingToCart(false);
+        }
+    };
+
     return (
         <MainLayout>
             <Navbar />
@@ -81,8 +115,24 @@ export default function BukuDetail() {
                                     <p className="text-3xl font-bold text-green-600">
                                         Rp {book.price.toLocaleString()}
                                     </p>
-                                    <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300">
-                                        Add to Cart
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <label className="text-sm font-medium text-gray-700">
+                                            Quantity:
+                                        </label>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            value={quantity}
+                                            onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value)))}
+                                            className="w-20 p-1 border rounded"
+                                        />
+                                    </div>
+                                    <button
+                                        onClick={handleAddToCart}
+                                        disabled={addingToCart}
+                                        className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-300 disabled:bg-blue-400"
+                                    >
+                                        {addingToCart ? 'Adding...' : 'Add to Cart'}
                                     </button>
                                     <button
                                         onClick={handleEdit}

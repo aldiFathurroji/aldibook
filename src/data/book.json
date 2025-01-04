@@ -8,10 +8,6 @@
     "price": 75000,
     "description": "A moving story about friendship, survival, and finding your voice.",
     "image": "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562769688l/26721568.jpg",
-    "pages": 480,
-    "language": "English",
-    "publisher": "Harlequin Teen",
-    "isbn": "978-0373212057",
     "slug": "the-problem-with-forever"
   },
   {
@@ -33,5 +29,14 @@
     "price": 89000,
     "description": "A romantic story about love and the sea.",
     "image": "https://inc.mizanstore.com/aassets/img/com_cart/produk/the-siren.jpg"
+  },
+  {
+    "id": 22,
+    "title": "bumi",
+    "author": "tereliye",
+    "category": "Fantasy",
+    "price": 100000,
+    "description": "aku manusia",
+    "image": "https://cdn.gramedia.com/uploads/items/9786020332956_Bumi-New-Cover.jpg"
   }
 ]

@@ -18,6 +18,7 @@ import Categories from './pages/Categories';
 import Search from './pages/Search';
 import BukuDetail from './pages/bukuDetail';
 import BookManager from './pages/BookManager';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/detail/:id" element={<BukuDetail />} />
         <Route path="/manage-books" element={<BookManager />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );

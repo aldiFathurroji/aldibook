@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "bookId": 2,
+    "quantity": 1,
+    "price": 68000,
+    "title": "180 Seconds",
+    "image": "https://images-na.ssl-images-amazon.com/images/I/61KUaK3V0IL._AC_UL210_SR210,210_.jpg",
+    "addedAt": "2025-01-04T08:25:46.155Z"
+  }
+]

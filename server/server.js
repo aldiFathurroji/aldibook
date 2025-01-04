@@ -12,6 +12,7 @@ app.use(express.json());
 // Path ke file JSON
 const bookPath = path.join(__dirname, '../src/data/book.json');
 const normalBookPath = path.join(__dirname, '../src/data/normalBook.json');
+const cartPath = path.join(__dirname, '../src/data/cart.json');
 
 // GET semua buku
 app.get('/api/books', async (req, res) => {
@@ -134,6 +135,76 @@ app.delete('/api/books/:id', async (req, res) => {
         res.json({ message: 'Book deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Error deleting book' });
+    }
+});
+
+// Get cart items
+app.get('/api/cart', async (req, res) => {
+    try {
+        const cartData = await fs.readFile(cartPath, 'utf8');
+        const cart = JSON.parse(cartData);
+        res.json(cart);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching cart' });
+    }
+});
+
+// Add to cart
+app.post('/api/cart', async (req, res) => {
+    try {
+        const cartData = await fs.readFile(cartPath, 'utf8');
+        const cart = JSON.parse(cartData);
+        
+        const newItem = {
+            id: Math.max(...cart.map(item => item.id), 0) + 1,
+            userId: 1, // Temporary userId
+            ...req.body,
+            addedAt: new Date().toISOString()
+        };
+        
+        cart.push(newItem);
+        await fs.writeFile(cartPath, JSON.stringify(cart, null, 2));
+        
+        res.status(201).json(newItem);
+    } catch (error) {
+        res.status(500).json({ error: 'Error adding to cart' });
+    }
+});
+
+// Update cart item
+app.put('/api/cart/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const cartData = await fs.readFile(cartPath, 'utf8');
+        let cart = JSON.parse(cartData);
+        
+        const index = cart.findIndex(item => item.id === parseInt(id));
+        if (index === -1) {
+            return res.status(404).json({ error: 'Cart item not found' });
+        }
+        
+        cart[index] = { ...cart[index], ...req.body };
+        await fs.writeFile(cartPath, JSON.stringify(cart, null, 2));
+        
+        res.json(cart[index]);
+    } catch (error) {
+        res.status(500).json({ error: 'Error updating cart item' });
+    }
+});
+
+// Delete cart item
+app.delete('/api/cart/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const cartData = await fs.readFile(cartPath, 'utf8');
+        let cart = JSON.parse(cartData);
+        
+        cart = cart.filter(item => item.id !== parseInt(id));
+        await fs.writeFile(cartPath, JSON.stringify(cart, null, 2));
+        
+        res.json({ message: 'Cart item deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error deleting cart item' });
     }
 });
 
